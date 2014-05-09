@@ -1,0 +1,6 @@
+= simple_form_for @campaign, :html => { :multipart => true } do |f|
+  = f.input :name
+  = f.input :url
+  = f.file_field :banner
+  br
+  = f.button :submit

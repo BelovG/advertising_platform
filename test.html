@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru-RU">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script type="text/javascript" >
+    console.log("log");
+</script>
+
+<script type="text/javascript" >
+    console.log("log");
+    $(function() {
+        return $.ajax({
+            crossDomain : true,
+            dataType: 'jsonp',
+            //format: 'js',
+            url: 'http://localhost:3000/get_banner/',
+            type: 'get',
+            success: function(data) {
+                console.log(data);
+                //$('#region-select-city').html(data);
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+Контент моей страницы
+</body>
+<html>

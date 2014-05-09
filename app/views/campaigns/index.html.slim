@@ -1,0 +1,9 @@
+- if @campaigns.any?
+  - @campaigns.each do |campaign|
+    = link_to campaign.name, campaign_path(campaign.id)
+    br
+    = campaign.url
+    br
+    = image_tag campaign.banner.url(:medium)
+    hr
+= link_to "New campaign", new_campaign_path
