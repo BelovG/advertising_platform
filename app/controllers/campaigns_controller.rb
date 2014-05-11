@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-
+  respond_to :json, :xml
   def index
     @campaigns = Campaign.all
   end
@@ -22,11 +22,13 @@ class CampaignsController < ApplicationController
   end
 
   def get_banner
-    id = Random.rand(1..Campaign.count)
-    @campaign = Campaign.find(id)
+    @campaign = Campaign.all.sample
+    Campaign.increment_counter(:shows, @campaign.id)
+    #@campaign.image_url = @campaign.banner.url(:medium)
     #binding.pry
-
-    render json:  { image_url: @campaign.banner.url(:medium), url: @campaign.url }
+    #@campaign = { image_url: @campaign.banner.url(:medium), url: @campaign.url }
+    #binding.pry
+    #render json:  { image_url: @campaign.banner.url(:medium), url: @campaign.url }
     #render :nothing => true
     #respond_to do |format|
     ##  format.js { render :content_type => 'text/javascript', :layout => false}
@@ -35,7 +37,9 @@ class CampaignsController < ApplicationController
   end
 
   def counter_clicks
-
+    Campaign.increment_counter(:clicks, params[:id])
+    @status = {status: "Ok"}
+    render json: @status.to_json, callback: params[:callback]
   end
 
   private

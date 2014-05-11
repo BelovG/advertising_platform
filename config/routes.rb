@@ -5,9 +5,12 @@ AdvertisingPlatform::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'campaigns#index'
   resources :campaigns, only: [:index, :new, :create, :show] do
-
+    member do
+      get 'counter_clicks'
+    end
   end
   get 'get_banner' => 'campaigns#get_banner', as: 'get_banner'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

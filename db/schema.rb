@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 20140506113718) do
   enable_extension "plpgsql"
 
   create_table "campaigns", force: true do |t|
-    t.string   "name"
-    t.string   "url"
+    t.string   "name",                            null: false
+    t.string   "url",                             null: false
+    t.integer  "shows",               default: 0, null: false
+    t.integer  "clicks",              default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "banner_file_name"

@@ -32,6 +32,8 @@ gem 'slim-rails', '~> 2.0.3'
 gem 'simple_form'
 gem 'bootstrap-sass'
 gem "paperclip", "~> 4.1"
+gem 'rabl'
+gem 'oj'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
