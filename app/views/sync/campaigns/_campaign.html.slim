@@ -1,0 +1,11 @@
+div
+  h3 Name: #{@campaign.name}
+  | Url: #{@campaign.url}
+  br
+  | Shows: #{@campaign.shows}
+  br
+  | Clicks: #{campaign.clicks}
+  br
+  = image_tag @campaign.banner.url(:medium)
+
+

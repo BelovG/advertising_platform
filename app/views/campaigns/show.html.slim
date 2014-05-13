@@ -1,7 +1,4 @@
-= @campaign.name
-br
-= @campaign.url
-br
-= image_tag @campaign.banner.url(:medium)
+= sync partial: 'campaign', resource: @campaign
 br
 = link_to "Back",campaigns_path
+br

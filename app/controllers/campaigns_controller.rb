@@ -1,5 +1,7 @@
 class CampaignsController < ApplicationController
+
   respond_to :json, :xml
+
   def index
     @campaigns = Campaign.all
   end
@@ -23,23 +25,17 @@ class CampaignsController < ApplicationController
 
   def get_banner
     @campaign = Campaign.all.sample
-    Campaign.increment_counter(:shows, @campaign.id)
-    #@campaign.image_url = @campaign.banner.url(:medium)
-    #binding.pry
-    #@campaign = { image_url: @campaign.banner.url(:medium), url: @campaign.url }
-    #binding.pry
-    #render json:  { image_url: @campaign.banner.url(:medium), url: @campaign.url }
-    #render :nothing => true
-    #respond_to do |format|
-    ##  format.js { render :content_type => 'text/javascript', :layout => false}
-    #  format.xml { render :xml => @campaign.to_xml }
-    #end
+    if @campaign.increment(:shows).save
+      sync_update @campaign.reload
+    end
   end
 
   def counter_clicks
-    Campaign.increment_counter(:clicks, params[:id])
-    @status = {status: "Ok"}
-    render json: @status.to_json, callback: params[:callback]
+    @campaign = Campaign.find(params[:id])
+    if @campaign.increment(:clicks).save
+      sync_update @campaign
+      render json: {status: "Ok"}.to_json, callback: params[:callback]
+    end
   end
 
   private
@@ -47,4 +43,5 @@ class CampaignsController < ApplicationController
   def campaign_params
     params.require(:campaign).permit(:name, :url, :banner)
   end
+
 end
