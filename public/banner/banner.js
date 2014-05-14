@@ -6,7 +6,7 @@ $(function() {
         url: 'http://localhost:3000/campaigns/get_banner/',
         type: 'get',
         success: function(data) {
-            $('#image').html('<a id="banner" onclick="counter_clicks()" data-id="'+ data.id +'" href="' + data.url + '"><img src="http://localhost:3000/' + data.image_url +'"></a>');
+            $('#image').html('<a id="banner" onclick="counter_clicks();" data-id="'+ data.id +'" href="' + data.url + '"><img src="http://localhost:3000/' + data.image_url +'"></a>');
         }
     });
 });
@@ -22,4 +22,5 @@ function counter_clicks() {
             console.log(data)
         }
     });
+    window.location.href($(this).attr('href'));
 }
