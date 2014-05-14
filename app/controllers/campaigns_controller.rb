@@ -24,21 +24,31 @@ class CampaignsController < ApplicationController
   end
 
   def get_banner
-    @campaign = Campaign.all.sample
-    if @campaign.increment(:shows).save
-      sync_update @campaign.reload
+    if Rails.cache.exist?(:campaigns)
+      @campaigns = Rails.cache.read(:campaigns)
+    else
+      @campaigns = Campaign.all.sample(100)
+      Rails.cache.write( :campaigns, @campaigns, expires_in: 60*60)
     end
+  end
+
+  def counter_shows
+    counter(:shows)
   end
 
   def counter_clicks
-    @campaign = Campaign.find(params[:id])
-    if @campaign.increment(:clicks).save
-      sync_update @campaign
-      render json: {status: "Ok"}.to_json, callback: params[:callback]
-    end
+    counter(:clicks)
   end
 
   private
+
+  def counter(attribute)
+    @campaign = Campaign.find(params[:id])
+    if @campaign.increment(attribute).save
+      sync_update @campaign
+      render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
+    end
+  end
 
   def campaign_params
     params.require(:campaign).permit(:name, :url, :banner)
