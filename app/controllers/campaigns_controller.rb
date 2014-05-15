@@ -33,22 +33,16 @@ class CampaignsController < ApplicationController
   end
 
   def counter_shows
-    counter(:shows)
+    CounterWorker.perform_async(params[:id], :shows)
+    render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
   end
 
   def counter_clicks
-    counter(:clicks)
+    CounterWorker.perform_async(params[:id], :clicks)
+    render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
   end
 
   private
-
-  def counter(attribute)
-    @campaign = Campaign.find(params[:id])
-    if @campaign.increment(attribute).save
-      sync_update @campaign
-      render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
-    end
-  end
 
   def campaign_params
     params.require(:campaign).permit(:name, :url, :banner)

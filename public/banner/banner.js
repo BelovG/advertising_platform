@@ -19,7 +19,8 @@ $(function() {
 });
 
 function counter_clicks() {
-    var id = $('#banner').attr('data-id')
+    var id = $('#banner').attr('data-id');
+    var url = $('#banner').attr('url');
     $.ajax({
         crossDomain : true,
         dataType: 'jsonp',
@@ -27,9 +28,9 @@ function counter_clicks() {
         type: 'get',
         success: function(data) {
             console.log(data);
+            document.location.href = url;
         }
     });
-    window.location.href($(this).attr('href'));
 }
 
 function counter_shows() {
@@ -49,6 +50,6 @@ function banner() {
     banners = JSON.parse(sessionStorage.banners);
     random_banner = banners[Math.floor(Math.random()*banners.length)];
     console.log(random_banner.id);
-    $('#image').html('<a id="banner" onclick="counter_clicks();" data-id="'+ random_banner.id +'" href="' + random_banner.url + '"><img src="http://localhost:3000/' + random_banner.image_url +'"></a>');
+    $('#image').html('<a id="banner" onclick="counter_clicks();" data-id="'+ random_banner.id +'" url="' + random_banner.url + '"><img src="http://localhost:3000/' + random_banner.image_url +'"></a>');
     counter_shows();
 }
