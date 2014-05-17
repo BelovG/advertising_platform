@@ -11,8 +11,8 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    @campaign = Campaign.new(campaign_params)
-    if @campaign.save
+    @campaign = Campaign.create(campaign_params)
+    if @campaign.errors.empty?
       redirect_to campaigns_path
     else
       render "new"
@@ -20,7 +20,10 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.find_by_id(params[:id])
+    unless @campaign
+      render text: "Page not found", status: 404
+    end
   end
 
   def get_banner
