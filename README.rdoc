@@ -1,28 +1,37 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##############
+Развертывание
+##############
+1. bundle
+2. Переименовать файл config/database.yml.example в database.yml и отредактировать.
+3.Создаем базу
+rake db:create
+4. Прогоняем миграции
+rake db:migrate
+5. Устанавливаем redis
+http://redis.io/download
 
-Things you may want to cover:
+##############
+Запуск
+##############
+1. rails s
+2. Во втором терминале запускаем sync
+rackup sync.ru -E production
+3. В третьем терминале запускаем sidekiq
+bundle exec sidekiq (не забываем перед этим запустить redis выполнив команду redis-server "ваш путь к config файлу")
 
-* Ruby version
+##############
+Проверка
+##############
+1. Перейти на http://localhost:3000/ и создать неколько компаний.
+2. Перейти на страницу одной из компаний.
+3. Далее открыть второе окно браузера рядом(для наглядности). И открыть в нем файл test.html который лежит в корневой директории проекта.
+4. Протестировать работоспособность.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+##############
+apache benchmark
+##############
+1. Запустить скрипт для нагрузочного тестирования
+ruby ab.rb
+(Файл ab.rb находится в корневой директории проекта)
