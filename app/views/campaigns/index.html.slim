@@ -5,6 +5,7 @@ textarea cols="90" rows="4"
   <div id="image"></div>
 hr
 h3 Campaigns
+= link_to "New campaign", new_campaign_path
 hr
 - if @campaigns.any?
   - @campaigns.each do |campaign|
@@ -14,4 +15,3 @@ hr
     br
     = image_tag campaign.banner.url(:medium)
     hr
-= link_to "New campaign", new_campaign_path
