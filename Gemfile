@@ -29,6 +29,7 @@ gem 'sync'
 gem "unicorn-rails"
 
 gem 'sidekiq'
+#gem 'sidekiq-limit_fetch'
 
 
 group :development, :test do
@@ -41,6 +42,7 @@ group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'simplecov', '~> 0.7.1'
 end
 
 group :doc do
