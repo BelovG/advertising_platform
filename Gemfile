@@ -9,10 +9,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
-
-
-
-
 gem 'pg'
 gem 'slim-rails', '~> 2.0.3'
 gem 'simple_form'
@@ -25,11 +21,7 @@ gem 'faye'
 gem 'thin', require: false
 gem 'sync'
 
-#gem 'unicorn'
-gem "unicorn-rails"
-
 gem 'sidekiq'
-#gem 'sidekiq-limit_fetch'
 
 
 group :development, :test do
