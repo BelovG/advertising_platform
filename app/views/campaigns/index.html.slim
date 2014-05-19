@@ -1,3 +1,11 @@
+h3 embed-код
+textarea cols="90" rows="4"
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script type="text/javascript" src="http://localhost:3000/banner/banner.js"></script>
+  <div id="image"></div>
+hr
+h3 Campaigns
+hr
 - if @campaigns.any?
   - @campaigns.each do |campaign|
     = link_to campaign.name, campaign_path(campaign.id)
