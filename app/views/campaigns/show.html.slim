@@ -1,12 +1,19 @@
-h3 Name: #{@campaign.name}
-| Url: #{@campaign.url}
-br
-#reload
-  = render partial: 'reload', locals: {clicks: @campaign.clicks, shows: @campaign.shows}
-br
-= image_tag @campaign.banner.url(:medium)
-
-br
-= link_to "Back",campaigns_path
-br
+#campaign campaign_id="#{@campaign.id}"
+  table border="1"
+    tr
+      th Name:
+      th Url:
+      th Shows:
+      th Clicks:
+      th Conversion:
+    tr
+      td #{@campaign.name}
+      td #{@campaign.url}
+      td#shows #{@campaign.shows}
+      td#clicks #{@campaign.clicks}
+      td#conversion #{((@campaign.clicks.to_f/@campaign.shows.to_f)*100).round(2)}%
+  br
+  = image_tag @campaign.banner.url(:medium)
+  br
+  = link_to "Back",campaigns_path
 = subscribe_to "/messages/#{@campaign.id}"
