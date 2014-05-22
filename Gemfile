@@ -17,9 +17,10 @@ gem "paperclip", "~> 4.1"
 gem 'rabl'
 gem 'oj'
 
-gem 'faye'
-gem 'thin', require: false
-gem 'sync'
+#gem 'faye'
+#gem 'thin', require: false
+#gem 'sync'
+
 gem "unicorn-rails"
 gem 'sidekiq'
 
