@@ -1,4 +1,12 @@
-= render partial: 'campaign', locals: {campaign: @campaign}
+h3 Name: #{@campaign.name}
+| Url: #{@campaign.url}
+br
+#reload
+  = render partial: 'reload', locals: {clicks: @campaign.clicks, shows: @campaign.shows}
+br
+= image_tag @campaign.banner.url(:medium)
+
 br
 = link_to "Back",campaigns_path
 br
+= subscribe_to "/messages/#{@campaign.id}"

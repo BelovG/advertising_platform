@@ -38,6 +38,8 @@ class CampaignsController < ApplicationController
   def counter_shows
     CounterWorker.perform_async(params[:id], :shows)
     render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
+    #@campaign = Campaign.find(params[:id])
+    #@campaign.increment(:shows).save
   end
 
   def counter_clicks

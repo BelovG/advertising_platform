@@ -20,6 +20,8 @@ gem 'oj'
 #gem 'faye'
 #gem 'thin', require: false
 #gem 'sync'
+gem "private_pub"
+gem "thin"
 
 gem "unicorn-rails"
 gem 'sidekiq'
