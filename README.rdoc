@@ -16,8 +16,8 @@ http://redis.io/download
 Запуск
 ##############
 1. rails s
-2. Во втором терминале запускаем sync
-rackup sync.ru -E production
+2. Во втором терминале запускаем private_pub
+rackup private_pub.ru -s thin -E production
 3. В третьем терминале запускаем sidekiq
 bundle exec sidekiq (не забываем перед этим запустить redis выполнив команду redis-server "ваш путь к config файлу")
 
