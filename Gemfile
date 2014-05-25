@@ -25,12 +25,14 @@ gem "thin"
 
 gem "unicorn-rails"
 gem 'sidekiq'
+gem 'dalli'
 
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'pry-nav', '>= 0.2.3'
   gem 'pry-rails', '>= 0.2.2'
+  gem "database_cleaner"
 end
 
 group :test do

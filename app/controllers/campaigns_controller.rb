@@ -27,20 +27,13 @@ class CampaignsController < ApplicationController
   end
 
   def get_banner
-    if Rails.cache.exist?(:campaigns)
-      @campaigns = Rails.cache.read(:campaigns)
-    else
-      @campaigns = Campaign.all.sample(100)
-      Rails.cache.write( :campaigns, @campaigns, expires_in: 60*60)
+    @campaigns = Rails.cache.fetch('campaigns', expires_in: 60.minutes) do
+      Campaign.find(Campaign.all.pluck(:id).sample(50))
     end
   end
 
   def counter_shows
     CounterWorker.perform_async(params[:id], :shows)
-    #render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
-    #@campaign = Campaign.find(params[:id])
-    #@campaign.increment(:shows).save
-    #PrivatePub.publish_to("/messages/#{@campaign.id}", message: {clicks: @campaign.clicks, shows: @campaign.shows})
     render json: {status_counter: "Ok"}.to_json, callback: params[:callback]
   end
 
