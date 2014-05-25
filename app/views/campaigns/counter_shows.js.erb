@@ -1,3 +1,0 @@
-<% publish_to "/messages/#{@campaign.id}" do %>
-$("#reload").html("<%= j render partial: 'reload', locals: {clicks: @campaign.clicks, shows: @campaign.shows} %>");
-<% end %>
