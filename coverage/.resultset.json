@@ -262,7 +262,6 @@
         1,
         4,
         null,
-        null,
         null
       ],
       "/home/white/white/ror/advertising_platform/app/controllers/application_controller.rb": [
@@ -312,17 +311,14 @@
         1,
         1,
         null,
-        null,
         1,
-        2,
-        2,
-        2,
-        null,
-        null,
+        0,
+        0,
+        0,
         null,
         null
       ]
     },
-    "timestamp": 1401029444
+    "timestamp": 1401042441
   }
 }
