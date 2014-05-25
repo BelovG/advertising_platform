@@ -17,16 +17,11 @@ gem "paperclip", "~> 4.1"
 gem 'rabl'
 gem 'oj'
 
-#gem 'faye'
-#gem 'thin', require: false
-#gem 'sync'
 gem "private_pub"
 gem "thin"
 
 gem "unicorn-rails"
 gem 'sidekiq'
-gem 'dalli'
-
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'

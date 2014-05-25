@@ -18,7 +18,7 @@ describe CampaignsController do
   end
 
   describe "new action" do
-    it "assigns a home, office, and mobile phone to the new contact" do
+    it "initializes campaign" do
       get :new
       expect(assigns(:campaign).present?).to eq(true)
     end
@@ -37,20 +37,20 @@ describe CampaignsController do
         }.to change(Campaign,:count).by(1)
       end
 
-      it "redirects to campaigns_path if validations pass" do
+      it "redirects to campaigns_path" do
         post :create, campaign: attributes_for(:campaign)
         expect(response).to redirect_to(campaigns_path)
       end
     end
 
     context "with invalid attributes" do
-      it "does not save the new contact" do
+      it "does not save the new campaign" do
         expect{
           post :create, campaign: attributes_for(:campaign, name: nil, url: nil)
         }.to_not change(Campaign,:count)
       end
 
-      it "renders new page if validations fail" do
+      it "renders new page" do
         post :create, campaign: attributes_for(:campaign, name: nil, url: nil)
         expect(response).to render_template('new')
       end
@@ -58,7 +58,7 @@ describe CampaignsController do
   end
 
   describe "show action" do
-    it "assigns the requested campaign to @campaign" do
+    it "assigns the requested campaign" do
       campaign = create(:campaign)
       get :show, id: campaign.id
       expect(assigns(:campaign)).to eq(campaign)
@@ -92,8 +92,8 @@ describe CampaignsController do
   end
 
   describe "counter_shows" do
-    it "counter_shows" do
-      campaign = create(:campaign, shows: 0, clicks: 0)
+    it "renders json" do
+      campaign = create(:campaign)
       allow(CounterWorker).to receive(:perform_async).with(campaign.id.to_s, :shows) { }
       get :counter_shows, id: campaign.id
       json = JSON.parse(response.body)
@@ -102,8 +102,8 @@ describe CampaignsController do
   end
 
   describe "counter_clicks" do
-    it "counter_clicks" do
-      campaign = create(:campaign, shows: 0, clicks: 0)
+    it "renders json" do
+      campaign = create(:campaign)
       allow(CounterWorker).to receive(:perform_async).with(campaign.id.to_s, :clicks) { }
       get :counter_clicks, id: campaign.id
       json = JSON.parse(response.body)
@@ -111,17 +111,17 @@ describe CampaignsController do
     end
   end
 
-
   describe "CounterWorker" do
-    it "CounterWorker" do
-      campaign = create(:campaign, shows: 0, clicks: 0)
+    it "increases :shows" do
+      campaign = create(:campaign)
       worker = CounterWorker.new
       allow(PrivatePub).to receive(:publish_to).with("/messages/#{campaign.id}", message: {clicks: 0, shows: 1}) { }
       worker.perform(campaign.id, :shows)
       expect(campaign.reload.shows).to eq(1)
     end
-    it "CounterWorker" do
-      campaign = create(:campaign, shows: 0, clicks: 0)
+
+    it "increases :clicks" do
+      campaign = create(:campaign)
       worker = CounterWorker.new
       allow(PrivatePub).to receive(:publish_to).with("/messages/#{campaign.id}", message: {clicks: 1, shows: 0}) { }
       worker.perform(campaign.id, :clicks)

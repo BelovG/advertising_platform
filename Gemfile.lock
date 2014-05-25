@@ -55,7 +55,6 @@ GEM
     connection_pool (2.0.0)
     cookiejar (0.3.2)
     daemons (1.1.9)
-    dalli (2.7.2)
     database_cleaner (1.2.0)
     diff-lcs (1.2.5)
     em-http-request (1.1.2)
@@ -254,7 +253,6 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   coffee-rails (~> 4.0.0)
-  dalli
   database_cleaner
   factory_girl_rails (= 4.2.1)
   jbuilder (~> 1.2)
