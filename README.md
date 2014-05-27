@@ -15,7 +15,8 @@
 1. Показы
 2. Клики
 3. Конверсия %
-Данные должно обновляться в реальном времени.
+
+Данные должно обновляться в **реальном времени**.
 
 ### Развертывание ###
 1. git clone https://mrwhitegit-admin@bitbucket.org/mrwhitegit-admin/advertising_platform.git
