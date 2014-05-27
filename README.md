@@ -18,24 +18,26 @@
 Данные должно обновляться в реальном времени.
 
 ### Развертывание ###
-1. bundle
-2. Переименовать файл config/database.yml.example в database.yml и отредактировать.
-3. Создаем базу
+1. git clone https://mrwhitegit-admin@bitbucket.org/mrwhitegit-admin/advertising_platform.git
+2. cd /advertising_platform
+3. bundle install
+4. Переименовать файл config/database.yml.example в database.yml и отредактировать.
+5. Создаем базу
 rake db:create
-4. Прогоняем миграции
+6. Прогоняем миграции
 rake db:migrate
-5. Устанавливаем redis
+7. Устанавливаем redis
 http://redis.io/download
 
 ### Запуск ###
 1. rails s
 2. Во втором терминале запускаем private_pub
-rackup private_pub.ru -s thin -E production
+(rackup private_pub.ru -s thin -E production)
 3. В третьем терминале запускаем sidekiq
-bundle exec sidekiq (не забываем перед этим запустить redis выполнив команду redis-server "ваш путь к config файлу")
+(bundle exec sidekiq) (не забываем перед этим запустить redis выполнив команду redis-server "ваш путь к config файлу")
 
 ### Проверка ###
-1. Перейти на http://localhost:3000/ и создать неколько компаний.
+1. Перейти на http://localhost:3000/ и создать неcколько компаний.
 2. Перейти на страницу одной из компаний.
 3. Далее открыть второе окно браузера рядом(для наглядности). И открыть в нем файл test.html который лежит в корневой директории проекта.
 4. Протестировать работоспособность.
