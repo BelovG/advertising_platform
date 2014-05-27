@@ -30,6 +30,7 @@ class CampaignsController < ApplicationController
     @campaigns = Rails.cache.fetch('campaigns', expires_in: 60.minutes) do
       Campaign.find(Campaign.all.pluck(:id).sample(50))
     end
+    render "get_banner.rabl", content_type: "application/javascript"
   end
 
   def counter_shows

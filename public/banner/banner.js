@@ -9,7 +9,7 @@ $(function() {
             url: 'http://localhost:3000/campaigns/get_banner/',
             type: 'get',
             success: function(data) {
-                //console.log(data);
+//                console.log(data);
                 sessionStorage.banners = JSON.stringify(data);
                 banner();
             }
